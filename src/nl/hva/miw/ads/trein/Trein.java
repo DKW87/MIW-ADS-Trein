@@ -8,6 +8,7 @@ package nl.hva.miw.ads.trein;
  * Wagons hebben een positie in de Trein. De posities beginnen bij 1 (niet 0!)
  */
 public class Trein {
+
     private int lengte;
     private Wagon kop;
 
@@ -66,7 +67,6 @@ public class Trein {
         }
         return 0;
     }
-
 
     /**
      * Voegt een wagon met wagonNr toe aan de Trein op de gegeven positie.
@@ -195,34 +195,21 @@ public class Trein {
     /**
      * Hulp methode.
      *
-     * @param w
+     * @param wagon
      * @return
      */
-    private Wagon geefVolgende(Wagon w) {
-        return w.getVolgende();
+    private Wagon geefVolgende(Wagon wagon) {
+        return wagon.getVolgende();
     }
 
     /**
      * Hulp methode.
      *
-     * @param w
+     * @param wagon
      * @return
      */
-    private Wagon geefVorige(Wagon w) {
-        return w.getVorige();
-    }
-
-    @Override
-    public String toString() {
-        StringBuffer sb = new StringBuffer();
-        sb.append("Trein{ lengte=" + lengte + " }");
-        Wagon w = kop;
-        while (w != null) {
-            sb.append(" " + w.getNr());
-            w = geefVolgende(w);
-        }
-
-        return sb.toString();
+    private Wagon geefVorige(Wagon wagon) {
+        return wagon.getVorige();
     }
 
     /**
@@ -231,17 +218,17 @@ public class Trein {
      * @return
      */
     public String omgekeerdeTrein() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append("Trein{ lengte=" + lengte + " }");
-        Wagon w = kop;
+        Wagon wagon = kop;
         // Loop naar de laatste wagon
-        while (w != null && geefVolgende(w) != null) {
-            w = geefVolgende(w);
+        while (wagon != null && geefVolgende(wagon) != null) {
+            wagon = geefVolgende(wagon);
         }
 
-        while (w != null) {
-            sb.append(" " + w.getNr());
-            w = geefVorige(w);
+        while (wagon != null) {
+            sb.append(" " + wagon.getNr());
+            wagon = geefVorige(wagon);
         }
 
         return sb.toString();
@@ -261,4 +248,16 @@ public class Trein {
         return som;
     }
 
-}
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Trein{ lengte=" + lengte + " }");
+        Wagon wagon = kop;
+        while (wagon != null) {
+            sb.append(" " + wagon.getNr());
+            wagon = geefVolgende(wagon);
+        }
+        return sb.toString();
+    }
+
+} // class
