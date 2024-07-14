@@ -247,4 +247,18 @@ public class Trein {
         return sb.toString();
     }
 
+    /**
+     * Methode die gebruikt wordt in de comparator unit-test om de som van wagonnrs te berekenen.
+     * @return
+     */
+    public int somWagonNummers() {
+        int som = 0;
+        Wagon huidigeWagon = this.kop;
+        while (huidigeWagon != null) {
+            som += huidigeWagon.getNr();
+            huidigeWagon = huidigeWagon.getVolgende();
+        }
+        return som;
+    }
+
 }
