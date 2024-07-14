@@ -1,10 +1,7 @@
 package nl.hva.miw.ads.trein;
 
-import comparator.SomWagonNummersComparator;
 import org.junit.jupiter.api.Test;
-
 import java.util.Arrays;
-import java.util.Comparator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,95 +18,95 @@ public class RangeerderTest {
 
     @Test
     public void verplaatsWagon() {
-        Rangeerder r = new Rangeerder();
-        Trein t1 = setUp();
-        Trein t2 = new Trein();
-        t2.voegWagonToe(101, 1);
-        t2.voegWagonToe(100, 1);
-        t2.voegWagonToe(105, 3);
-        t2.voegWagonToe(104, 3);
+        Rangeerder rangeerder = new Rangeerder();
+        Trein trein1 = setUp();
+        Trein trein2 = new Trein();
+        trein2.voegWagonToe(101, 1);
+        trein2.voegWagonToe(100, 1);
+        trein2.voegWagonToe(105, 3);
+        trein2.voegWagonToe(104, 3);
 
-        r.verplaatsWagon(t1, t2, 999);
+        rangeerder.verplaatsWagon(trein1, trein2, 999);
         String expected = "Trein{ lengte=4 } 1 2 10 12";
-        String actual = t1.toString();
+        String actual = trein1.toString();
         assertEquals(expected, actual);
 
         expected = "Trein{ lengte=4 } 100 101 104 105";
-        actual = t2.toString();
+        actual = trein2.toString();
         assertEquals(expected, actual);
 
-        r.verplaatsWagon(t1, t2, 2);
+        rangeerder.verplaatsWagon(trein1, trein2, 2);
         expected = "Trein{ lengte=3 } 1 10 12";
-        actual = t1.toString();
+        actual = trein1.toString();
         assertEquals(expected, actual);
 
         expected = "Trein{ lengte=5 } 100 101 104 105 2";
-        actual = t2.toString();
+        actual = trein2.toString();
         assertEquals(expected, actual);
     }
 
     @Test
     public void hangWagonAchterAndereWagon() {
-        Rangeerder r = new Rangeerder();
-        Trein t = setUp();
+        Rangeerder rangeerder = new Rangeerder();
+        Trein trein = setUp();
 
-        r.hangWagonAchterAndereWagon(t, 20, 10);
+        rangeerder.hangWagonAchterAndereWagon(trein, 20, 10);
         String expected = "Trein{ lengte=5 } 1 2 10 20 12";
-        String actual = t.toString();
+        String actual = trein.toString();
         assertEquals(expected, actual);
 
-        r.hangWagonAchterAndereWagon(t, 25, 999);
+        rangeerder.hangWagonAchterAndereWagon(trein, 25, 999);
         expected = "Trein{ lengte=5 } 1 2 10 20 12";
-        actual = t.toString();
+        actual = trein.toString();
         assertEquals(expected, actual);
     }
 
     @Test
     public void hangWagonVoorAndereWagon() {
-        Rangeerder r = new Rangeerder();
-        Trein t = setUp();
+        Rangeerder rangeerder = new Rangeerder();
+        Trein trein = setUp();
 
-        r.hangWagonVoorAndereWagon(t, 15, 10);
+        rangeerder.hangWagonVoorAndereWagon(trein, 15, 10);
         String expected = "Trein{ lengte=5 } 1 2 15 10 12";
-        String actual = t.toString();
+        String actual = trein.toString();
         assertEquals(expected, actual);
 
-        r.hangWagonVoorAndereWagon(t, 30, 999);
+        rangeerder.hangWagonVoorAndereWagon(trein, 30, 999);
         expected = "Trein{ lengte=5 } 1 2 15 10 12";
-        actual = t.toString();
+        actual = trein.toString();
         assertEquals(expected, actual);
     }
 
     @Test
     public void sorteerTreinenComparator() {
-        Trein t1 = new Trein();
-        t1.voegWagonToe(400, 1);
-        t1.voegWagonToe(300, 2);
-        t1.voegWagonToe(100, 3);
+        Trein trein1 = new Trein();
+        trein1.voegWagonToe(400, 1);
+        trein1.voegWagonToe(300, 2);
+        trein1.voegWagonToe(100, 3);
 
-        Trein t2 = new Trein();
-        t2.voegWagonToe(40, 1);
-        t2.voegWagonToe(30, 2);
-        t2.voegWagonToe(10, 3);
-        t2.voegWagonToe(20, 4);
+        Trein trein2 = new Trein();
+        trein2.voegWagonToe(40, 1);
+        trein2.voegWagonToe(30, 2);
+        trein2.voegWagonToe(10, 3);
+        trein2.voegWagonToe(20, 4);
 
-        Trein t3 = new Trein();
-        t3.voegWagonToe(4, 1);
-        t3.voegWagonToe(3, 2);
+        Trein trein3 = new Trein();
+        trein3.voegWagonToe(4, 1);
+        trein3.voegWagonToe(3, 2);
 
         Trein[] treinArray = new Trein[3];
-        treinArray[0] = t1;
-        treinArray[1] = t2;
-        treinArray[2] = t3;
+        treinArray[0] = trein1;
+        treinArray[1] = trein2;
+        treinArray[2] = trein3;
 
         Trein[] expected = new Trein[3];
-        expected[0] = t3;
-        expected[1] = t2;
-        expected[2] = t1;
+        expected[0] = trein3;
+        expected[1] = trein2;
+        expected[2] = trein1;
 
         Arrays.sort(treinArray, new comparator.SomWagonNummersComparator());
 
         assertArrayEquals(expected, treinArray);
     }
 
-}
+} // class

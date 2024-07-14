@@ -55,4 +55,5 @@ public class Rangeerder {
             trein.voegWagonToe(nieuweWagonNr, positie);
         }
     }
-}
+
+} // class
